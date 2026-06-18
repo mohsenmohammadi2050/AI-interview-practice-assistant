@@ -1,6 +1,6 @@
-# AI Interview Coach
+# AI Interview Coach - Voice-Based AI Interview Practice App
 
-AI Interview Coach is a local voice-based interview practice app. It simulates a realistic hiring manager, lets a candidate answer by voice, transcribes the answer with Groq Whisper, and uses an OpenRouter-hosted LLM to give structured coaching feedback.
+AI Interview Coach is a local two-agent interview practice app. It simulates a realistic hiring manager, lets a candidate answer by voice, transcribes the answer with Groq Whisper, and uses an OpenRouter-hosted LLM to give structured coaching feedback.
 
 The goal is practical interview preparation: realistic questions, editable transcripts, honest feedback, improved answers, and the option to retry weak answers before moving on.
 
@@ -15,6 +15,47 @@ The goal is practical interview preparation: realistic questions, editable trans
 - Local JSON session storage.
 - Retry flow: if feedback recommends retrying a question, the candidate can answer the same question again before saving the attempt.
 - Template Markdown files for job announcements, candidate profiles, and custom agent behavior instructions.
+
+## Agent Design
+
+The app uses two focused AI agents instead of a complicated orchestration framework.
+
+### 1. Hiring Manager Agent
+
+The Hiring Manager Agent generates one realistic interview question at a time. It uses:
+
+- job announcement
+- candidate profile/CV
+- custom agent instructions
+- previous questions and answers
+- previous coach feedback
+- selected language mode
+
+It adapts the interview flow by asking practical technical, behavioral, motivation, project, role-fit, communication, and follow-up questions. It does not evaluate the candidate or give feedback.
+
+### 2. Interview Coach Agent
+
+The Interview Coach Agent evaluates the candidate's submitted transcript. It returns structured feedback with:
+
+- overall score
+- category scores
+- strengths
+- weaknesses
+- improved answer
+- speaking tips
+- next focus
+- retry recommendation
+
+The coach is honest but supportive. It focuses on realistic spoken interview performance, not perfect written answers.
+
+### Custom Agent Instructions
+
+Users can upload or paste extra instructions from a human hiring manager, recruiter, mentor, or their own notes. These instructions are passed to both agents:
+
+- the Hiring Manager Agent uses them to shape question style and priorities
+- the Interview Coach Agent uses them to shape evaluation and feedback
+
+The base prompts define the permanent rules of each agent. Custom instructions make each interview session more specific and realistic.
 
 ## Tech Stack
 

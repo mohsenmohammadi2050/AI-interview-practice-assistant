@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Interview Coach</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>AI Interview Coach</h1>
+          <p>Practice realistic interviews with voice, transcript editing, and coaching feedback.</p>
+        </div>
+        <div id="providerInfo" class="provider">Backend not connected</div>
+      </header>
+
+      <section class="layout">
+        <section class="panel setup-panel">
+          <h2>Setup</h2>
+          <label>
+            Job announcement
+            <textarea id="jobAnnouncement" rows="9" placeholder="Paste the job announcement here"></textarea>
+          </label>
+          <label>
+            Upload job announcement (.txt or .md)
+            <input id="jobFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
+          </label>
+          <label>
+            Candidate profile / CV
+            <textarea id="candidateProfile" rows="9" placeholder="Paste your CV, skills, projects, and experience"></textarea>
+          </label>
+          <label>
+            Upload candidate profile / CV (.txt or .md)
+            <input id="candidateFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
+          </label>
+          <label>
+            Custom agent instructions
+            <textarea id="agentInstructions" rows="7" placeholder="Paste notes from a hiring manager, recruiter, or mentor"></textarea>
+          </label>
+          <label>
+            Upload instructions (.txt or .md)
+            <input id="instructionFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
+          </label>
+          <label>
+            Language mode
+            <select id="languageMode">
+              <option value="auto">Auto-detect from job announcement</option>
+              <option value="english">English</option>
+              <option value="norwegian">Norwegian</option>
+              <option value="mixed">Mixed English/Norwegian</option>
+            </select>
+          </label>
+          <button id="startInterviewBtn" class="primary">Start interview</button>
+          <p id="setupError" class="error"></p>
+        </section>
+
+        <section class="main-column">
+          <section class="panel interview-panel">
+            <div class="section-heading">
+              <h2>Interview</h2>
+              <button id="saveSessionBtn" class="secondary" disabled>Save session</button>
+            </div>
+            <div id="currentQuestion" class="question-box">Start an interview to receive the first question.</div>
+
+            <div class="recorder">
+              <div class="recorder-actions">
+                <button id="startRecordingBtn" class="secondary" disabled>Start recording</button>
+                <button id="stopRecordingBtn" class="secondary" disabled>Stop recording</button>
+                <button id="transcribeBtn" class="secondary" disabled>Upload / transcribe</button>
+              </div>
+              <p id="recordingStatus" class="status">Recording not started.</p>
+              <audio id="audioPreview" controls hidden></audio>
+              <p id="recordingError" class="error"></p>
+            </div>
+
+            <label>
+              Editable transcript / manual answer
+              <textarea id="answerTranscript" rows="8" placeholder="Your transcript will appear here. You can also type manually."></textarea>
+            </label>
+
+            <div class="actions">
+              <button id="submitAnswerBtn" class="primary" disabled>Submit answer</button>
+              <button id="retryQuestionBtn" class="secondary" disabled>Retry question</button>
+              <button id="nextQuestionBtn" class="secondary" disabled>Next question</button>
+            </div>
+            <p id="interviewError" class="error"></p>
+          </section>
+
+          <section class="panel feedback-panel">
+            <h2>Feedback</h2>
+            <div id="feedbackContent" class="empty">Feedback appears after you submit an answer.</div>
+          </section>
+
+          <section class="panel history-panel">
+            <h2>Session history</h2>
+            <div id="sessionHistory" class="empty">No answers yet.</div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

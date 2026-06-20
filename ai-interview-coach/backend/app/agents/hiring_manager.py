@@ -17,7 +17,7 @@ class HiringManagerAgent:
         user_context = {
             "job_announcement": session.job_announcement,
             "candidate_profile": session.candidate_profile,
-            "agent_instructions": session.agent_instructions,
+            "hiring_manager_instructions": session.hiring_manager_instructions or session.agent_instructions,
             "language_mode": session.language_mode,
             "history": [turn.model_dump() for turn in session.turns],
         }

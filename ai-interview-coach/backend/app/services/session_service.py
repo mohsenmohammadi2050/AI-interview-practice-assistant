@@ -43,6 +43,12 @@ class SessionService:
         session = InterviewSession(
             job_announcement=_validate_required_text(request.job_announcement, "Job announcement"),
             candidate_profile=_validate_required_text(request.candidate_profile, "Candidate profile"),
+            hiring_manager_instructions=(
+                request.hiring_manager_instructions.strip() or request.agent_instructions.strip()
+            ),
+            interview_coach_instructions=(
+                request.interview_coach_instructions.strip() or request.agent_instructions.strip()
+            ),
             agent_instructions=request.agent_instructions.strip(),
             language_mode=request.language_mode,
         )

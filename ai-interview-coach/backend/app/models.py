@@ -64,6 +64,8 @@ class InterviewSession(BaseModel):
     updated_at: str = Field(default_factory=utc_now_iso)
     job_announcement: str
     candidate_profile: str
+    hiring_manager_instructions: str = ""
+    interview_coach_instructions: str = ""
     agent_instructions: str = ""
     language_mode: LanguageMode = "auto"
     turns: list[SessionTurn] = Field(default_factory=list)
@@ -72,6 +74,8 @@ class InterviewSession(BaseModel):
 class StartInterviewRequest(BaseModel):
     job_announcement: str
     candidate_profile: str
+    hiring_manager_instructions: str = ""
+    interview_coach_instructions: str = ""
     agent_instructions: str = ""
     language_mode: LanguageMode = "auto"
 

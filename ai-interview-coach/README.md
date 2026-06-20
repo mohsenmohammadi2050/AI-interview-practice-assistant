@@ -6,7 +6,7 @@ The goal is practical interview preparation: realistic questions, editable trans
 
 ## Highlights
 
-- Realistic hiring-manager question generation based on a job announcement, candidate profile, and custom agent instructions.
+- Realistic hiring-manager question generation based on a job announcement, candidate profile, and hiring-manager-specific instructions.
 - Spoken-answer workflow with browser audio recording and file-based speech-to-text.
 - Groq speech-to-text using `whisper-large-v3`.
 - OpenRouter LLM support through an OpenAI-compatible chat completions client.
@@ -14,7 +14,7 @@ The goal is practical interview preparation: realistic questions, editable trans
 - Plain HTML, CSS, and JavaScript frontend. No React, Vite, npm, Docker, database, LangChain, or LangGraph.
 - Local JSON session storage.
 - Retry flow: if feedback recommends retrying a question, the candidate can answer the same question again before saving the attempt.
-- Template Markdown files for job announcements, candidate profiles, and custom agent behavior instructions.
+- Template Markdown files for job announcements, candidate profiles, hiring manager behavior, and coach evaluation behavior.
 
 ## Agent Design
 
@@ -26,7 +26,7 @@ The Hiring Manager Agent generates one realistic interview question at a time. I
 
 - job announcement
 - candidate profile/CV
-- custom agent instructions
+- hiring manager instructions
 - previous questions and answers
 - previous coach feedback
 - selected language mode
@@ -48,14 +48,14 @@ The Interview Coach Agent evaluates the candidate's submitted transcript. It ret
 
 The coach is honest but supportive. It focuses on realistic spoken interview performance, not perfect written answers.
 
-### Custom Agent Instructions
+### Separate Agent Instructions
 
-Users can upload or paste extra instructions from a human hiring manager, recruiter, mentor, or their own notes. These instructions are passed to both agents:
+Users can upload or paste separate instruction files for each agent:
 
-- the Hiring Manager Agent uses them to shape question style and priorities
-- the Interview Coach Agent uses them to shape evaluation and feedback
+- the Hiring Manager Agent instructions shape question style, priorities, difficulty, and follow-up behavior
+- the Interview Coach Agent instructions shape scoring priorities, feedback style, retry advice, and improved-answer style
 
-The base prompts define the permanent rules of each agent. Custom instructions make each interview session more specific and realistic.
+The base prompts define the permanent rules of each agent. Uploaded instructions make each interview session more specific and realistic without mixing the two agents' responsibilities.
 
 ## Tech Stack
 
@@ -91,7 +91,8 @@ ai-interview-coach/
   templates/
     candidate_profile_template.md
     job_announcement_template.md
-    agent_instructions_template.md
+    hiring_manager_instructions_template.md
+    interview_coach_instructions_template.md
     evaluation_rubric_template.md
     language_settings_template.md
   .env.example
@@ -213,14 +214,15 @@ http://127.0.0.1:8000/health
 
 1. Upload or paste a job announcement.
 2. Upload or paste a candidate profile/CV.
-3. Optionally upload or paste custom agent instructions.
-4. Choose the interview language mode.
-5. Click **Start interview**.
-6. Record an answer or type manually.
-7. Transcribe the audio.
-8. Edit the transcript.
-9. Submit the answer for feedback.
-10. Retry the same question if needed, or continue to the next question.
+3. Optionally upload or paste Hiring Manager Agent instructions.
+4. Optionally upload or paste Interview Coach Agent instructions.
+5. Choose the interview language mode.
+6. Click **Start interview**.
+7. Record an answer or type manually.
+8. Transcribe the audio.
+9. Edit the transcript.
+10. Submit the answer for feedback.
+11. Retry the same question if needed, or continue to the next question.
 
 Evaluated answers are held as a pending attempt until **Next question** or **Save session** is clicked. Retrying the same question replaces the pending attempt.
 
@@ -230,7 +232,8 @@ The `templates/` folder contains example Markdown files. They are not strict sch
 
 - `job_announcement_template.md`: structure for a role description, responsibilities, skills, technologies, and interview focus areas.
 - `candidate_profile_template.md`: structure for CV, skills, projects, strengths, weaknesses, and preferred answer style.
-- `agent_instructions_template.md`: instructions for how the AI hiring manager and coach should behave.
+- `hiring_manager_instructions_template.md`: instructions for how the Hiring Manager Agent should ask questions and follow up.
+- `interview_coach_instructions_template.md`: instructions for how the Interview Coach Agent should evaluate answers and give feedback.
 - `evaluation_rubric_template.md`: scoring guidance for clarity, relevance, structure, specificity, confidence, and language quality.
 - `language_settings_template.md`: language behavior for English, Norwegian, auto, and mixed modes.
 

@@ -22,7 +22,7 @@ class InterviewCoachAgent:
         user_context = {
             "job_announcement": session.job_announcement,
             "candidate_profile": session.candidate_profile,
-            "agent_instructions": session.agent_instructions,
+            "interview_coach_instructions": session.interview_coach_instructions or session.agent_instructions,
             "language_mode": session.language_mode,
             "question": question.model_dump() if question else None,
             "answer_transcript": answer_transcript,

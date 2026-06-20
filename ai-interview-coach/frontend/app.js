@@ -13,8 +13,10 @@ const elements = {
   jobFile: document.querySelector("#jobFile"),
   candidateProfile: document.querySelector("#candidateProfile"),
   candidateFile: document.querySelector("#candidateFile"),
-  agentInstructions: document.querySelector("#agentInstructions"),
-  instructionFile: document.querySelector("#instructionFile"),
+  hiringManagerInstructions: document.querySelector("#hiringManagerInstructions"),
+  hiringManagerInstructionFile: document.querySelector("#hiringManagerInstructionFile"),
+  interviewCoachInstructions: document.querySelector("#interviewCoachInstructions"),
+  interviewCoachInstructionFile: document.querySelector("#interviewCoachInstructionFile"),
   languageMode: document.querySelector("#languageMode"),
   startInterviewBtn: document.querySelector("#startInterviewBtn"),
   setupError: document.querySelector("#setupError"),
@@ -55,7 +57,8 @@ function setupPayload() {
   return {
     job_announcement: elements.jobAnnouncement.value.trim(),
     candidate_profile: elements.candidateProfile.value.trim(),
-    agent_instructions: elements.agentInstructions.value.trim(),
+    hiring_manager_instructions: elements.hiringManagerInstructions.value.trim(),
+    interview_coach_instructions: elements.interviewCoachInstructions.value.trim(),
     language_mode: elements.languageMode.value,
   };
 }
@@ -201,8 +204,12 @@ elements.candidateFile.addEventListener("change", (event) => {
   loadTextFileIntoTextarea(event, elements.candidateProfile, "candidate profile");
 });
 
-elements.instructionFile.addEventListener("change", (event) => {
-  loadTextFileIntoTextarea(event, elements.agentInstructions, "agent instructions");
+elements.hiringManagerInstructionFile.addEventListener("change", (event) => {
+  loadTextFileIntoTextarea(event, elements.hiringManagerInstructions, "hiring manager instructions");
+});
+
+elements.interviewCoachInstructionFile.addEventListener("change", (event) => {
+  loadTextFileIntoTextarea(event, elements.interviewCoachInstructions, "interview coach instructions");
 });
 
 elements.startInterviewBtn.addEventListener("click", async () => {

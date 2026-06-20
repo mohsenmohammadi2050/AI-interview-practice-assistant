@@ -36,12 +36,20 @@
             <input id="candidateFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
           </label>
           <label>
-            Custom agent instructions
-            <textarea id="agentInstructions" rows="7" placeholder="Paste notes from a hiring manager, recruiter, or mentor"></textarea>
+            Hiring Manager Agent instructions
+            <textarea id="hiringManagerInstructions" rows="6" placeholder="Paste instructions for how the interviewer should ask questions"></textarea>
           </label>
           <label>
-            Upload instructions (.txt or .md)
-            <input id="instructionFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
+            Upload hiring manager instructions (.txt or .md)
+            <input id="hiringManagerInstructionFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
+          </label>
+          <label>
+            Interview Coach Agent instructions
+            <textarea id="interviewCoachInstructions" rows="6" placeholder="Paste instructions for how the coach should evaluate and give feedback"></textarea>
+          </label>
+          <label>
+            Upload interview coach instructions (.txt or .md)
+            <input id="interviewCoachInstructionFile" type="file" accept=".txt,.md,text/plain,text/markdown" />
           </label>
           <label>
             Language mode
